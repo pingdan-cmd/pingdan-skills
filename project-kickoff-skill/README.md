@@ -27,7 +27,7 @@ AI 的产出上限 = 需求清晰度。缺失信息问出来、写成文件、�
 
 ## 怎么用
 
-把本目录整个放到 WorkBuddy 的 skills 目录下即可。主文件 `SKILL.md` 带 frontmatter（name / description），会被自动识别；细则在 `references/`，用到才读。
+本目录即一个完整技能包。主文件 `SKILL.md` 带 frontmatter（name / description），会被自动识别；细则在 `references/`，用到才读。
 
 ## 目录结构
 
