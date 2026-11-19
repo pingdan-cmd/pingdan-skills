@@ -2,7 +2,7 @@
 
 > **调用**：阶段 ⑤ 要搭 Agent 运行时壳子、或判断「换业务要不要重写」时用
 > **触发**：Harness、运行时、感知规划行动观察、LLM 适配器、Tools 注册表、换业务只换右侧
-> **路径**：`skills/superpowers/skills/项目启动准备/references/Harness壳子.md`
+> **路径**：`project-kickoff-skill/references/Harness壳子.md`
 > **边界**：只给通用壳子结构；不含任何具体业务的工具与技能
 
     用户任务
