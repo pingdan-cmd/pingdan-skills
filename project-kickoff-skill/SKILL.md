@@ -1,85 +1,85 @@
 ---
-name: project-kickoff-prep
+name: 项目启动准备
 description: >-
-  Turns a vague "I want to build X" into an AI-executable requirements package.
-  Use when the user says "help me build X / write me a scraper / I want a tool, agent, app, or mini program / where do I start / help me sort out the requirements / what is the workflow / what data should be stored", or when requirements are vague before starting a task and it is unclear who it is for, what problem it solves, or where it lives.
-  Not for cases where the plan is settled and only coding remains (→ superpowers), authoring a skill (→ the skill-authoring chapter of `skill`), pure research (→ 调研收集 / research collection), or pure Q&A.
+  把模糊的「我想做个 X」变成可交给 AI 执行的需求包。
+  当用户说「帮我做个 X / 帮我写个爬虫 / 我要做个工具、Agent、App、小程序 / 我该从哪开始 / 帮我理一下需求 / 这事的工作流是什么 / 要存哪些数据」，或开工前需求模糊、要交给 AI 却说不清给谁用／解决什么／放哪时使用。
+  不用于方案已定只差编码（→ superpowers）、造技能（→ skill 造技能篇）、纯查资料（→ 调研收集）、纯答疑。
 agent_created: true
 ---
 
-# Project Kickoff Prep
+# 项目启动准备
 
-> **Use when**: Before starting a task, turn a vague idea into an AI-executable requirements package; this file keeps only triggers / routing / gates / stages / red lines; details are in `references/`, read on demand.
-> **Triggers**: I want to build X, help me sort out the requirements, who is it for, where does it live, what data is stored, goal in three lines, workflow, first small step.
-> **Path**: `skills/superpowers/skills/project-kickoff-prep/`
-> **Boundary**: No coding, no research, no Q&A; if the plan is settled, hand off to superpowers; maintenance steps stay out of the execution context.
+> **调用**：开工前把模糊想法问成可交给 AI 的需求包；本文只留触发／分流／门禁／阶段／红线，细则按需读 references/
+> **触发**：我想做个X、帮我理需求、给谁用、放哪、存什么、目标三行、工作流、第一小步
+> **路径**：`skills/superpowers/skills/项目启动准备/`
+> **边界**：不写代码、不查资料、不答疑；方案已定转 superpowers，维护动作不进执行上下文
 
-> **Constraint layers (read first)**: The step order, stage gates, and process orchestration in this file are **reference paths (soft constraints)** — they may be adjusted, merged, or skipped based on the situation.
-> **Hard constraints live only in the results**: output definitions, acceptance criteria, acceptance checklists, evidence requirements, and the red lines marked in this file are never relaxed or omitted. Go through the acceptance checklist item by item; missing one item means the loop is not closed.
+> **约束分层（先读）**：本文的步骤顺序、阶段门禁与流程编排都是**参考路径（软约束）**——可按现场判断调整、合并、跳过。
+> **强约束只在结果**：产出物定义、验收判据、验收清单、证据要求与本文标明的红线不放宽、不省略；验收清单逐条过，缺一项不算闭环。
 
-Core principle: **the ceiling of AI output = clarity of requirements.** This skill asks out the missing information, writes it into files, and confirms it step by step.
-Status, hands-on progress, open items, verification records, and dates are not part of this file; they are kept separately by the maintainer.
+核心：**AI 的产出上限 = 需求清晰度**。本技能把缺失信息问出来、写成文件、逐步确认。
+状态、实战进度、待定项、查证记录、日期不进本文件，由维护者另行留存。
 
-## 0. Entry routing (first decide whether to run, and how heavy)
+## 0. 入口分流（先判跑不跑、跑多重）
 
-- If one sentence already answers "who it is for / what problem it solves / where it lives / what data is stored" → **do not run this skill**.
-- Plan settled and only coding remains → `superpowers`; authoring a skill → `skill` (skill-authoring chapter); pure research → `调研收集` (research collection); pure Q&A → answer directly.
-- **Small project** (single file, one-off, reversible if wrong) → **lightweight mode**: only do gates + ④ + ⑥, no ledger, no four-stage wrap-up.
-- Everything else → full flow (gates + ①–⑥ + ledger).
-- The higher the cost, the fuller the gates: irreversible changes / involvement of permissions or sensitive information / compliance red lines → **lightweight mode is not allowed**.
+- 一句话能说清「给谁、解决什么、放哪、存什么」→ **不跑本技能**。
+- 方案已定只差编码 → `superpowers`；造技能 → `skill`（造技能篇）；纯查资料 → `调研收集`；纯答疑 → 直接答。
+- **小项目**（单文件、一次性、错了能重来）→ **轻量模式**：只做 门禁 ＋ ④ ＋ ⑥，不建台账、不走四段式。
+- 其余 → 完整流程（门禁 ＋ ①～⑥ ＋ 台账）。
+- 代价越高，门槛越全：改动不可逆／涉及权限或敏感信息／合规红线 → **不得**用轻量模式。
 
-## 1. Gates (align first; order is adjustable)
+## 1. 门禁（建议先对齐，顺序可调）
 
-- **G1 Goal in three lines**: who it is for / what problem it solves / what counts as done. Usually one question at a time, at most 3 questions, written as three lines for alignment (whether to confirm line by line is a situational judgment).
-- **G2 Delivery vehicle**: platform + form + filename + location of the source of truth.
-- If the user has already given it, adopt it directly without rephrasing and re-asking; only come back to confirm when a same-named item is found to already exist.
-- If it cannot be answered → mark 【Assumption】, write it into the project brief and add it to the items to confirm; **never fabricate, never take irreversible action on an assumption**.
-- If the three lines are imprecise, or still vague after 3 questions → see the full interview in `references/gates-and-interview.md`.
+- **G1 目标三行**：给谁用／解决什么／什么算成。通常一次一问、最多 3 问，写成三行供对齐（是否逐行确认按现场判断）。
+- **G2 交付载体**：平台＋形态＋文件名＋正本位置。
+- 用户已给的直接采用，不换措辞重问；只在发现同名已存在时回来确认。
+- 答不上来 → 标【假设】写入立项书并列入待确认，**不自行编造，不在假设上做不可逆动作**。
+- 三行写不准、或问满 3 问仍含糊 → 可参考完整问诊（`references/门禁与问诊.md`）。
 
-## 2. Six stages
+## 2. 六个阶段
 
-| Stage | Question to answer | Output | Pass criterion |
+| 阶段 | 要回答 | 产出 | 通过判据 |
 |---|---|---|---|
-| ① Understand people | Who uses it? Frequent needs? Real problem? | Persona + real problem | Can write "for whom, solving what" with evidence sources |
-| ② Map the workflow | How does a human do it without AI? | Numbered step table | Each step marks executor / reviewer / where exceptions go |
-| ③ Data | What is stored? How is it related? | Field table + unique key | Every downstream output field has a source |
-| ④ Engineering-grade requirements | How to hand it to AI? | Filled-in requirements template | Passes the requirements checklist |
-| ⑤ Tools + skills + shell | How does AI take action? | Tool cards + skill | Each tool has a single responsibility and fixed JSON output |
-| ⑥ First small step | Which piece to build first? | Minimum runnable artifact | Runs on real input, output matches the agreed structure |
+| ① 理解人 | 谁用？高频诉求？真问题？ | 人群＋真问题 | 能写出带证据来源的「给谁解决什么」 |
+| ② 画工作流 | 没有 AI 时真人怎么做？ | 编号步骤表 | 每步标明执行者／验收人／异常去向 |
+| ③ 数据 | 存什么？怎么关联？ | 字段表＋唯一键 | 每个下游输出字段都有来源 |
+| ④ 工程级需求 | 怎么交给 AI？ | 填好的需求模板 | 通过需求检查清单 |
+| ⑤ 工具+技能+壳子 | AI 怎么动手？ | 工具卡片＋skill | 每个工具职责单一、出参为固定 JSON |
+| ⑥ 第一小步 | 先做哪一块？ | 最小可运行产物 | 真实输入跑通，输出符合约定结构 |
 
-- If stuck → pick a template with `problem-templates`, do not think bare or force fabrication.
-- ①–③ can be advanced in the same batch; ④⑤⑥ are best done separately (whether to merge is a situational judgment).
-- A criterion not met = this stage is not complete (result criteria are not relaxed); whether to move to the next stage is a situational judgment, not an automatic halt on failure.
+- 卡住 → `problem-templates` 选模板，不裸想、不硬编。
+- ①～③ 可同批推进；④⑤⑥ 建议分开做（合并与否按现场判断）。
+- 判据不达标＝本阶段未完成（结果判据不放宽）；是否进下一阶段按现场判断，不因未达标自动停摆。
 
-## 3. Wrap-up of each stage (four-part format)
+## 3. 每阶段收尾（四段式）
 
-Stage goal / results (paths only) / items needing confirmation / next stage scope (the four-part format is a reference wrap-up format). **Whether to wait for user confirmation is a situational judgment** — do not halt over lack of confirmation, no mandatory gate is set here.
-Lightweight mode skips the four-part format; wrap up with one line: "what was done / evidence it runs / any leftovers".
+阶段目标／成果（只列文件路径）／需确认事项／下一阶段范围（四段式是参考收尾格式）。**是否等用户确认按现场判断**——不因未确认停摆，此处不设强制闸。
+轻量模式免四段式，改用一句「做了什么／跑通证据／有无遗留」收尾。
 
-## 4. Red lines
+## 4. 红线
 
-- **No fabrication**: personas / data / requirements / goals — ask, do not guess.
-- **Confirm before acting**: confirmation cadence is in §3, no gate is repeated here.
-- **Build only one first**: the first small step builds one piece only; expand after it runs.
-- **Do not reinvent the wheel**: reuse existing skills / tools / foundations first.
+- **不编造**：人群／数据／需求／目标，问，不猜。
+- **先确认后动手**：确认节奏见 §3，此处不重复设闸。
+- **先只做一个**：第一小步只做一块，跑通再扩。
+- **不从零造轮子**：先复用现成技能／工具／底座。
 
-## 5. Read on demand (read when used, do not preload)
+## 5. 按需读取（用到才读，不预载）
 
-| At this step | Read |
+| 到这一步 | 读 |
 |---|---|
-| Gate interview not penetrating | `references/gates-and-interview.md` |
-| ④ write requirements | `references/requirements-template.md` |
-| ⑤ seal tools / write a skill | `references/tool-cards-and-six-parts.md` |
-| ⑤ build the runtime shell | `references/harness-shell.md` |
-| Start a new project directory / write the ledger | `references/project-directory-skeleton.md` |
-| Hitting pitfalls / translating a workflow | `references/antipatterns-and-examples.md` |
-| Audit skill usage at project wrap-up | `references/skill-usage-audit-checklist.md` |
-| Maintain this skill (maintainers only) | `references/library-maintenance-checklist.md` |
+| 门禁问不透 | `references/门禁与问诊.md` |
+| ④ 写需求 | `references/需求模板.md` |
+| ⑤ 封工具／写 skill | `references/工具卡片与技能六部分.md` |
+| ⑤ 搭运行时壳子 | `references/Harness壳子.md` |
+| 开工建目录／写台账 | `references/项目目录骨架.md` |
+| 踩坑／翻译工作流 | `references/反模式与例子.md` |
+| 项目收尾审计技能调用 | `references/技能调用审计清单.md` |
+| 维护本技能（仅维护者） | `references/库维护自检.md` |
 
-## Appendix: seams with existing skills
+## 附：与已有技能的接缝
 
-- `superpowers`: coding execution after the plan is settled; the **adjudication** that gates come first is unchanged; enter its suggested gates only after the plan is settled.
-- `skill` (skill-authoring chapter): if you want to solidify a workflow into a skill → hand off to it.
-- `problem-templates`: if a stage is stuck → pick a template to solve it, do not think bare.
-- `asset-review`: before delivery, re-check whether the artifact meets the bar → hand off to it.
-- `调研收集` (research collection, Video Channel research chapter): ① when external comments / verbatim transcript data is needed → hand off to it.
+- `superpowers`：方案定了之后的编码执行；门禁在前的先后**裁决**不变，方案定了才进它的建议门禁。
+- `skill`（造技能篇）：想把流程固化成技能 → 转它。
+- `problem-templates`：阶段卡住 → 选模板解，不裸想。
+- `asset-review`：交付前复核产物是否达标 → 转它。
+- `调研收集`（视频号调研篇）：① 需要外部评论／逐字稿数据 → 转它。

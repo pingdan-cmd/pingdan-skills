@@ -8,7 +8,7 @@
 
 | Skill | 作用 | 正文语言 |
 | --- | --- | --- |
-| [project-kickoff-skill](project-kickoff-skill/) | 把「我想做个 X」变成可交给 AI 执行的需求包 | 英文 |
+| [project-kickoff-skill](project-kickoff-skill/) | 把「我想做个 X」变成可交给 AI 执行的需求包 | 中文 |
 
 ### project-kickoff-skill（项目启动准备）
 
@@ -29,7 +29,7 @@
 
 **怎么用**：把 `project-kickoff-skill/` 整个目录放到 WorkBuddy 的 skills 目录下即可。主文件 `SKILL.md` 带 frontmatter（name / description），会被自动识别。
 
-**来源**：由个人 Obsidian 库中的「项目启动准备」技能整包翻译而来，正文与文件名均已英文化。库专属技能名（如 `superpowers`、`调研收集`、`problem-templates`）保留原名，避免与正本术语分叉。
+**来源**：搬运自个人 Obsidian 库中的「项目启动准备」技能，正文与文件名均为中文正本。
 
 ## 后续
 
